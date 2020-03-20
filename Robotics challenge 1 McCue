@@ -1,35 +1,36 @@
-//James McCue, 3/19/20
+
 
 
 int l_motor = 0;     //left motor
 int r_motor = 1;     //right motor
 int speed = 60;      //speed of robot
-int lowSpeed = 20    //speed of robot when going slow
-int r_sensor = 4;    //input for right sensor
+int lowSpeed = 20;    //speed of robot when going slow
+int r_sensor = 9;    //input for right sensor
 int l_sensor = 5;    //input for left sensor
-int f_sensor = 6;    //input for front sensor
-int wall = 0;		 //distance for the sensors to see the wall
+int middle_distance = 1;    //input for middle distance sensor
+int wall = 1;		 //distance for the sensors to see the wall
+int distance = 180;
 
 
-Void forward(){    //moves the robot forward
-	Motor (l_motor, speed);
-	Motor (r_motor, speed);
+void forward(){    //moves the robot forward
+	motor (l_motor, speed);
+	motor (r_motor, speed);
 }
 
 
-Void turn(){       //turns the robot when it sees the pvc pipe
-	Motor (l_motor, lowSpeed);
+void turn(){       //turns the robot when it sees the pvc pipe
+	motor (l_motor, lowSpeed);
 }
 
-int Main(){
+int main(){
 
-	While (analog(r_sensor) > wall){
+	while (1){
 		forward();
 }
-	While (analog(r_sensor) = wall){
-			While (analog(f_sensor) > wall){
+	while (digital(r_sensor) > wall){
+			while (analog(middle_distance) > wall){
 					turn();
-						While (analog(f_sensor) = wall){
+						while (analog(middle_distance) < wall){
 								ao();
 							}
 					}
