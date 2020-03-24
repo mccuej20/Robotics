@@ -1,0 +1,47 @@
+// Created on Mon March 23 2020
+
+int m_range = 400; //distance from wall for middle sensor
+int l_motor = 0;
+int r_motor = 2;
+int l_reflect = 1000; // detecting black line sensor
+int speed = 50;
+
+
+void forward(){
+	motor (l_motor, speed);
+	motor (r_motor, speed);
+}
+
+void findblack1(){
+		while(analog(3) >1000){
+			ao();
+			forward();
+		}
+	}
+void findblack2(){
+		while(analog(3) >1000){
+			ao();
+			motor(l_motor, speed);
+			motor(r_motor, 20);
+			msleep (300);
+			ao();
+		}
+	}
+	
+void findwall(){
+	forward();
+	while (analog(1)  <400){
+		ao();
+		motor(r_motor, speed);
+		msleep (300);
+		ao();
+	}
+}
+int main()
+{
+	forward();
+	findblack1();
+	findblack2();
+	findwall();	
+}
+
