@@ -1,0 +1,21 @@
+
+
+
+
+
+
+int speed = 50;
+int negspeed = -50;
+int l_motor = 0;
+int r_motor = 2;
+
+int main()
+{
+	forward();
+}
+
+
+void forward() {
+	motor (l_motor, speed);
+	motor (r_motor, speed);
+}
