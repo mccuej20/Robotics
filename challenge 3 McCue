@@ -1,0 +1,70 @@
+int l_motor = 0; //left motor
+int r_motor = 2; //right motor
+int speed = 40; //speed of robot
+int highSpeed = 70; //high speed
+int r_reflect = 6; //right reflection sensor
+int l_reflect = 5; //left reflection sensor
+int l_distance = 0; //left distance sensor
+int mid_distance = 1; //middle distance sensor
+int r_distance = 2; //right distance sensor
+int wall_right = 250; //distance for the wall on the right
+int wall_mid = 400; //robot stops when mid sensor sees wall at this distance
+int blackLine = 500; //sensor sees black line
+
+
+void forward(){ //moves robot forward
+	motor (l_motor, speed);
+	motor (r_motor, speed);
+}
+
+void turnRight(){ //turns right slightly
+	motor(l_motor, highSpeed);
+	motor(r_motor, speed);
+}
+
+void turnLeft(){ //turns left slightly
+	motor(r_motor, highSpeed);
+	motor(l_motor, speed);
+}
+
+void sharpLeft(){ //turns left sharply
+	motor (r_motor, highSpeed);
+}
+
+void wallFollow(){
+	while (analog(mid_distance) > wall_mid){
+		while (analog(r_distance) > wall_right){
+		turnRight();	
+	}
+		while (analog(r_distance) < wall_right){
+		turnLeft();
+	}
+}
+}
+
+void lineFollow(){
+	while (analog(mid_distance) > wall_mid){
+		while (analog(r_reflect) > blackLine){
+		turnRight();	
+	}
+		while (analog(r_reflect) < blackLine){
+		turnLeft();
+	}
+}
+}
+
+
+
+int main(){
+	forward();
+	msleep (1000);
+	ao();
+	wallFollow();
+	ao();
+	sharpLeft();
+	msleep(1250);
+	ao();
+	forward();
+	msleep(2000);
+	lineFollow();
+}
