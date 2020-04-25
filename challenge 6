@@ -1,0 +1,27 @@
+int speed = 50;
+int motorL = 0;
+int motorR = 0;
+int counter;
+
+
+void forward(){
+	motor (motorL, speed);
+	motor (motorR, speed);
+}
+
+void backward(){
+	motor (motorL, -speed);
+	motor (motorR, -speed);
+}
+
+int main(){
+
+for (counter = 0; counter <6; counter++){
+	forward();
+	msleep(1000);
+	backward();
+	msleep(1000);
+	printf(counter);
+}
+
+}
